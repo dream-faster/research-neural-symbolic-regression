@@ -15,9 +15,8 @@ def add_next_op(program: LispProgram, op: Operator, constant: Constant) -> LispP
     return "( " + op + " " + constant + " " + program + " )"
 
 
-def generate_random_eq(ops: List[str], length: int) -> LispProgram:
+def generate_random_eq(operators: List[str], length: int) -> LispProgram:
 
-    operators = ["*", "*", "+", "-"]
     def generate_next(ops: List[str]) -> Tuple[Operator, Constant, List[str]]:
         ops = ops.copy()
         op = choice(ops)
@@ -30,10 +29,10 @@ def generate_random_eq(ops: List[str], length: int) -> LispProgram:
         program = add_next_op(program, op, constant)
     return program
 
-def generate_random_eq_valid(length: int) -> str:
+def generate_random_eq_valid(operators: List[str], length: int) -> str:
     valid = False
     while valid == False:
-        eq = generate_random_eq(length)
+        eq = generate_random_eq(operators, length)
         valid = is_eq_valid(eq)
     return eq
 

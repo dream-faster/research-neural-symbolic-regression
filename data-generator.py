@@ -2,17 +2,20 @@
 # To add a new markdown cell, type '# %% [markdown]'
 # %%
 import pandas as pd
-from utils import generate_random_eq, is_eq_valid
-from lis import eval_lisp, parse
+from utils.data_generator_utils import generate_random_eq, is_eq_valid
+from utils.lis import eval_lisp, parse
+
+
+GENERATED_SEQ_LENGTH = 10
+
+# %%
+binary_operators = ["^", "*", "+", "-", "/"]
+unary_operators = ["sin", "cos"]
+generate_random_eq(binary_operators, unary_operators, 3)
 
 
 # %%
-symbols = ["*", "*", "+", "-"]
-generate_random_eq(symbols, 3)
-
-
-# %%
-eqs = list(set([generate_random_eq(symbols, 3) for i in range(0, 20000)]))
+eqs = list(set([generate_random_eq(binary_operators, unary_operators, 3) for i in range(0, 20000)]))
 len(eqs)
 
 
@@ -28,9 +31,10 @@ len(eqs)
 X = []
 for fun in eqs:
     int_seq = []
-    for i in range(1, 10):
+    for i in range(1, GENERATED_SEQ_LENGTH):
         try:
-            int_seq.append(int(eval_lisp(parse(fun.replace('t', str(i))))))
+            num = eval_lisp(parse(fun.replace('t', str(i))))
+            int_seq.append(round(num, 2))
         except:
             pass
     X.append(int_seq)
@@ -41,17 +45,8 @@ len(X)
 data = pd.DataFrame(X)
 data['eqs'] = eqs
 data.dropna(inplace = True)
-data[0] = data[0].astype(int)
-data[1] = data[1].astype(int)
-data[2] = data[2].astype(int)
-data[3] = data[3].astype(int)
-data[4] = data[4].astype(int)
-data[5] = data[5].astype(int)
-data[6] = data[6].astype(int)
-data[7] = data[7].astype(int)
-data[8] = data[8].astype(int)
-
-data.shape[0]
+for i in range(0, 8):
+    data[i] = data[i]
 
 
 # %%

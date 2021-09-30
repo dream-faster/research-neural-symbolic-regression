@@ -1,0 +1,16 @@
+name: deeplearning
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - pytest
+  - pytorch
+  - matplotlib
+  - requests
+  - pandas
+  - scikit-learn
+  - more-itertools
+  - line_profiler
+  - wandb
+  - numpy=1.19.5
+prefix: /usr/local/anaconda3/envs/deeplearning

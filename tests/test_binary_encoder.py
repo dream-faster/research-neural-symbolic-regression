@@ -15,6 +15,6 @@ def test_dec2bin():
 
 def test_float2bin():
     assert np.all(float2bin(tensor([0.01]), 3, 3, 2).numpy() == tensor([[0., 0., 0., 0., 0., 0., 1.]]).numpy())
-    assert np.all(float2bin(tensor([0.01]), 7, 7, 2).numpy() == tensor([[0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 1.]]).numpy())
-    assert np.all(float2bin(tensor([0.01]), 7, 7, 2).numpy() == tensor([[0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 1.]]).numpy())
-
+    assert np.all(float2bin(tensor([0.01]), 7, 7, 2).numpy() == tensor([[0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 1.]]).numpy())
+    assert np.all(float2bin(tensor([1.01]), 7, 7, 2).numpy() == tensor([[0., 0., 0., 0., 0., 0., 0., 1., 0., 0., 0., 0., 0., 0., 1.]]).numpy())
+    assert np.all(float2bin(tensor([-1.01]), 7, 7, 2).numpy() == tensor([[1., 0., 0., 0., 0., 0., 0., 1., 0., 0., 0., 0., 0., 0., 1.]]).numpy())

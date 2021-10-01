@@ -22,6 +22,8 @@ def dec2bin_sequence(x: tensor, bits: int) -> tensor:
 
 # %%
 def float2bin(x: tensor, integral_bits: int, fractional_bits: int, precision: int) -> tensor:
+    '''Takes in a tensor([<float>]) and returns a len(1 + integral_bits + fractional_bits) tensor, its binary representation.'''
+
     # calculate the sign bit
     sign = tensor([[0 if x.signbit() == False else 1]])
     if x.signbit() == True:
@@ -41,10 +43,10 @@ def float2bin(x: tensor, integral_bits: int, fractional_bits: int, precision: in
 
     # then concat the 3
     return cat((sign, integral_encoded, fractional_encoded), dim = 1)
-# %%
+
 def float2bin_sequence(x: tensor, integral_bits: int, fractional_bits: int, precision: int) -> tensor:
     b = []
     for i in range(x.shape[0]):
         b.append(float2bin(x[i].unsqueeze(0), integral_bits, fractional_bits, precision))
     return cat(b).flatten()
-# %%
+

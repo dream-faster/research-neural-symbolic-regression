@@ -1,5 +1,6 @@
 import pandas as pd
 from torch.utils.data import Dataset
+from utils.lis import parse_with_parens
 
 class SymbolicRegressionDataset(Dataset):
     def __init__(self, file_name):
@@ -16,6 +17,6 @@ class SymbolicRegressionDataset(Dataset):
     def __getitem__(self, idx):
 
         value = self.X[idx]
-        label = self.y[idx]
+        label = parse_with_parens(self.y[idx])
 
         return value, label

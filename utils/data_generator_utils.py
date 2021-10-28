@@ -1,3 +1,5 @@
+# %%
+
 from random import choice, uniform
 from typing import List, Tuple
 from utils.lis import eval_lisp, parse
@@ -20,7 +22,7 @@ def add_next_op(program: LispProgram, op: Operator, constant: Constant, list_of_
 def generate_random_eq(binary_operators: List[Operator], unary_operators: List[Operator], length: int) -> LispProgram:
 
     def generate_next(ops: List[str]) -> Tuple[Operator, Constant, List[str]]:
-        random_float = round(uniform(0.0, 1000.0), 2)	
+        random_float = int(uniform(0.0, 9.0))
         ops = ops.copy()
         op = choice(ops)
         ops.remove(op)
@@ -61,3 +63,5 @@ def eq_to_seq(eq: LispProgram, length: int) -> List[int]:
             pass
     if len(int_seq) != length: return [0] * length
     return int_seq
+
+# %%

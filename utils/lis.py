@@ -5,6 +5,7 @@
 from __future__ import division
 import math
 import operator as op
+from utils.stdlib import flatten_and_pad
 
 ################ Types
 
@@ -17,6 +18,12 @@ Number = (int, float) # A Lisp Number is implemented as a Python int or float
 def parse(program):
     "Read a Scheme expression from a string."
     return read_from_tokens(tokenize(program))
+
+def parse_with_parens(program):
+    parsed = read_from_tokens(tokenize(program))
+    return flatten_and_pad(parsed, '(', ')')
+
+
 
 def tokenize(s):
     "Convert a string into a list of tokens."
@@ -37,6 +44,7 @@ def read_from_tokens(tokens):
         raise SyntaxError('unexpected )')
     else:
         return atom(token)
+
 
 def atom(token):
     "Numbers become numbers; every other token is a symbol."

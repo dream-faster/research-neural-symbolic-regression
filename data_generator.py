@@ -11,6 +11,8 @@ GENERATED_SEQ_LENGTH = 10
 # %%
 binary_operators = ["^", "*", "+", "-", "/"]
 unary_operators = ["sin", "cos"]
+constants_etc = ['(', ')', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 't']
+all_program_tokens = binary_operators + unary_operators + constants_etc
 generate_random_eq(binary_operators, unary_operators, 3)
 
 

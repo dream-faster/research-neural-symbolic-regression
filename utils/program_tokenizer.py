@@ -2,14 +2,19 @@ from typing import Counter, List
 from torchtext.vocab import Vocab
 from torch.nn.utils.rnn import pad_sequence
 import torch.nn.functional as F
-
+import torch
 
 def build_vocab(data: List[str]) -> Vocab:
     counter = Counter(data)
     return Vocab(counter, specials=['<pad>', '<bos>', '<eos>'])
 
-F.one_hot()
+def one_hot_encode_program(tokens: List[str], vocab: Vocab) -> torch.Tensor:
+    indices = [vocab.stoi[str(t)] for t in tokens]
+    return F.one_hot(torch.LongTensor(indices), len(vocab))
 
+def one_hot_decode_program(tensor: torch.Tensor, vocab: Vocab) -> List[str]:
+    indices = tensor.argmax(dim=-1)
+    return [vocab.itos[i] for i in indices]
 
 # PAD_IDX = de_vocab['<pad>']
 # BOS_IDX = de_vocab['<bos>']
